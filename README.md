@@ -1,4 +1,4 @@
-# Foundation Model for Gravitational Lensing
+# Gravitational Lens Finding
 # Common Test : Multi-class classification
 Model Weights : https://drive.google.com/file/d/1nT6aQJgbQ8Lw-V2OPZk2N33vEW7wN1-I/view?usp=sharing
 1. Imports and Setup:
