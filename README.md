@@ -71,6 +71,8 @@ Model Weights : https://drive.google.com/file/d/1QQDdzlZ-zAc8s53k1o3pi3F1HBXWRTS
 
 1. **Custom SSIM Loss Function:** Implemented a custom Structural Similarity (SSIM) loss function to improve image quality in training. It applies a Gaussian kernel to compute mean, variance, and covariance, returning 1−SSIM as the loss.
 
+  ![SSIM_Loss](https://github.com/KowshikB03/ML4SCI/blob/03e77fbef349b4117c919f454310ce31e60cfa31/Images/SSIM_Loss_Function.png)
+
 2. **UNet with Timestep Embedding:** Designed a UNet-based encoder-decoder architecture with timestep embedding for time-dependent processing. The encoder extracts hierarchical features, and the decoder reconstructs images while incorporating timestep information.
 
 3. **DDPM Implementation:** Developed a Denoising Diffusion Probabilistic Model (DDPM) using UNet as the noise prediction network. The model adds and removes noise progressively, using both MSE and SSIM losses to enhance generation quality.
@@ -103,6 +105,7 @@ Model weights : https://drive.google.com/file/d/1R-eU3k0lRmdi8ODO83Brxk7-__La0np
 - **Physics-Informed Head:** Predicts deflection angles using a fully connected layer (2048 → 512 → 2) with tanh activation.
 
 6. **Custom Physics-Based Loss Function (lensing_loss):** Implemented a physics-inspired loss using the lens equation. Computed predicted source position (β) and minimized the error with Smooth L1 Loss.
+   ![PINN_Loss_Equation](https://github.com/KowshikB03/ML4SCI/blob/03e77fbef349b4117c919f454310ce31e60cfa31/Images/PINN_Lensing%20_Equation.png)
 
 7. **Training Strategy (25 Epochs):** Used CrossEntropyLoss for classification and Adam optimizer (lr = 0.0001). Dynamically adjusted the physics loss weight using a sigmoid-based schedule. Trained the model on mini-batches, progressively reducing loss from 1.1215 → 0.6228, showing convergence.
 
