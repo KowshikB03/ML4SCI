@@ -1,4 +1,4 @@
-# DeepLense Project - Gravitational Lens Finding
+# DeepLense Project 
 # Common Test : Multi-class classification
 Model Weights : https://drive.google.com/file/d/1nT6aQJgbQ8Lw-V2OPZk2N33vEW7wN1-I/view?usp=sharing
 1. Imports and Setup:
@@ -65,3 +65,52 @@ Model weights: https://drive.google.com/file/d/1pwXNavIymE41kXsK_edQD6hKMmPocERy
 7. Final Evaluation:
 
 - Evaluated the trained model on the test dataset, plotting the ROC curve and printing the AUC score.
+
+# Specific Test 4 : Diffusion Models 
+
+1. **Custom SSIM Loss Function:** Implemented a custom Structural Similarity (SSIM) loss function to improve image quality in training. It applies a Gaussian kernel to compute mean, variance, and covariance, returning 1−SSIM as the loss.
+
+2. **UNet with Timestep Embedding:** Designed a UNet-based encoder-decoder architecture with timestep embedding for time-dependent processing. The encoder extracts hierarchical features, and the decoder reconstructs images while incorporating timestep information.
+
+3. **DDPM Implementation:** Developed a Denoising Diffusion Probabilistic Model (DDPM) using UNet as the noise prediction network. The model adds and removes noise progressively, using both MSE and SSIM losses to enhance generation quality.
+
+4. **Custom Lensing Dataset Loader:** Created a PyTorch dataset class to load, normalize, and preprocess gravitational lensing images from .npy files. Images are resized, converted to tensors, and normalized for consistent model input.
+
+5. **Training Pipeline:** Designed a training loop that leverages the Adam optimizer and ReduceLROnPlateau scheduler. The model trains on batches from the Lensing dataset, with dynamic timestep selection and loss computation for optimization.
+
+6. **Efficient Dataset Sampling:** To accelerate training, selected only 0.5% of the training set and performed a 90-10 train-validation split. Data is loaded in batches with shuffling for efficient gradient updates.
+
+7. **Progressive Training and Optimization:** Trained the DDPM for 25 epochs, monitoring loss reduction from 1.0042 to 0.6779. Used learning rate scheduling and gradient accumulation to refine training dynamics.
+
+8. **Model Saving and Future Work:** Saved trained model weights in JSON format for easy reuse. Future improvements include increasing dataset size, extending training epochs, and monitoring validation loss for better generalization.
+
+# Specific Test 5 : Physics-Guided ML
+
+1. **Essential Libraries & Setup:** Imported deep learning libraries (PyTorch, torchvision), data handling tools (numpy, PIL, os, glob), and evaluation metrics (sklearn). Used torchvision.transforms for preprocessing and handled datasets with Dataset, DataLoader, and Subset. Checked for GPU availability and set the device accordingly.
+
+2. **Dataset Management (LensingDataset):** Created a custom dataset class to load .npy images and their labels from three classes ("no", "vort", "sphere"). Ensured consistent image shape, applied transformations, and normalized data. Computed dataset statistics (mean, std) for standardization.
+
+3. **Data Preprocessing & Augmentation:** Converted numpy arrays to PIL images and applied random augmentations: affine transformations, flipping, resizing (128×128), and Gaussian blur. Normalized images using computed mean and standard deviation.
+
+4. **Dataset Splitting & DataLoaders:** Created training and validation datasets, selecting a 10% subset of the training set for efficiency. Initialized DataLoader with batch size 32, shuffling for training and non-shuffling for validation. Analyzed class distributions to ensure balance.
+
+5. **Physics-Informed ResNet Model (LensingResNet):** Used ResNet-50 as a backbone with pretrained ImageNet weights. Modified the first convolutional layer to accept grayscale images and replaced the fully connected (FC) layer with two heads:
+
+- **Classification Head:** Predicts class labels using a fully connected network (2048 → 512 → 3) with ReLU and Dropout.
+
+- **Physics-Informed Head:** Predicts deflection angles using a fully connected layer (2048 → 512 → 2) with tanh activation.
+
+6. **Custom Physics-Based Loss Function (lensing_loss):** Implemented a physics-inspired loss using the lens equation. Computed predicted source position (β) and minimized the error with Smooth L1 Loss.
+
+7. **Training Strategy (25 Epochs):** Used CrossEntropyLoss for classification and Adam optimizer (lr = 0.0001). Dynamically adjusted the physics loss weight using a sigmoid-based schedule. Trained the model on mini-batches, progressively reducing loss from 1.1215 → 0.6228, showing convergence.
+
+8. **Evaluation & Validation:** Set model to eval() mode and used torch.no_grad() for efficient inference. Computed classification and physics losses, aggregated total validation loss, and measured performance. Final validation loss: 0.8567, indicating generalization ability.
+
+
+
+
+
+
+
+
+
