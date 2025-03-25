@@ -67,6 +67,7 @@ Model weights: https://drive.google.com/file/d/1pwXNavIymE41kXsK_edQD6hKMmPocERy
 - Evaluated the trained model on the test dataset, plotting the ROC curve and printing the AUC score.
 
 # Specific Test 4 : Diffusion Models 
+Model Weights : https://drive.google.com/file/d/1QQDdzlZ-zAc8s53k1o3pi3F1HBXWRTSV/view?usp=sharing
 
 1. **Custom SSIM Loss Function:** Implemented a custom Structural Similarity (SSIM) loss function to improve image quality in training. It applies a Gaussian kernel to compute mean, variance, and covariance, returning 1−SSIM as the loss.
 
@@ -85,6 +86,7 @@ Model weights: https://drive.google.com/file/d/1pwXNavIymE41kXsK_edQD6hKMmPocERy
 8. **Model Saving and Future Work:** Saved trained model weights in JSON format for easy reuse. Future improvements include increasing dataset size, extending training epochs, and monitoring validation loss for better generalization.
 
 # Specific Test 5 : Physics-Guided ML
+Model weights : https://drive.google.com/file/d/1R-eU3k0lRmdi8ODO83Brxk7-__La0npu/view?usp=sharing
 
 1. **Essential Libraries & Setup:** Imported deep learning libraries (PyTorch, torchvision), data handling tools (numpy, PIL, os, glob), and evaluation metrics (sklearn). Used torchvision.transforms for preprocessing and handled datasets with Dataset, DataLoader, and Subset. Checked for GPU availability and set the device accordingly.
 
